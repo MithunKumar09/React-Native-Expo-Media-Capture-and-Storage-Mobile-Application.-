@@ -1,0 +1,17 @@
+# Node modules
+node_modules/
+
+# Expo build files
+.expo/
+.expo-shared/
+*.expo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# React Native
+/android/
+/ios/
