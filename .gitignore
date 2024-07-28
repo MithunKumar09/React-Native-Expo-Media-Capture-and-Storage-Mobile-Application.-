@@ -1,3 +1,4 @@
+@"
 # Node modules
 node_modules/
 
@@ -16,7 +17,9 @@ node_modules/
 /android/
 /ios/
 
+# Remove sensitive file
 backend/serviceAccountKey.json
 
 # secrets
 .env
+"@ > .gitignore
