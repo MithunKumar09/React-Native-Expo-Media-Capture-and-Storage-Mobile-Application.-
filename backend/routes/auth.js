@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -54,5 +55,42 @@ router.post('/login', async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 });
+
+// Generate reset password token
+router.post('/generate-reset-token', async (req, res) => {
+  const { emailOrUsername } = req.body;
+  try {
+      const user = await User.findOne({
+          $or: [{ email: emailOrUsername }, { username: emailOrUsername }]
+      });
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      return res.status(200).json({ token });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Reset password
+router.post('/reset-password', async (req, res) => {
+  const { token, newPassword } = req.body;
+  try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const userId = decoded.id;
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      await User.findByIdAndUpdate(userId, { password: hashedPassword });
+
+      return res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error) {
+      console.error(error);
+      return res.status(400).json({ error: 'Invalid or expired token' });
+  }
+});
+
 
 module.exports = router;
