@@ -18,15 +18,15 @@ export default function LoginScreen({ navigation }) {
             Alert.alert('Validation Error', 'Password is required.');
             return;
         }
-
+    
         setLoading(true); // Show loading indicator
-
+    
         try {
-            const response = await axios.post('http://192.168.143.187:5000/api/auth/login', { emailOrUsername, password });
+            const response = await axios.post('http://192.168.222.187:5000/api/auth/login', { emailOrUsername, password });
             const { token, user } = response.data;
-
+    
             await storeToken({ token, userType: 'user', userID: user._id, name: user.username, email: user.email });
-
+    
             // Show success dialog
             Alert.alert(
                 'Login Successful',
@@ -46,8 +46,7 @@ export default function LoginScreen({ navigation }) {
                 ]
             );
         } catch (error) {
-            console.error('Login error:', error.response ? error.response.data.error : error.message);
-            // Show error dialog
+            console.error('Login error:', error); // Log the full error object
             Alert.alert(
                 'Login Failed',
                 error.response ? error.response.data.error : 'An error occurred',
@@ -57,6 +56,7 @@ export default function LoginScreen({ navigation }) {
             setLoading(false); // Hide loading indicator
         }
     };
+    
 
     return (
         <View style={styles.container}>
@@ -86,6 +86,9 @@ export default function LoginScreen({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.redirectText}>Don't have an account? Register</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ResetPassword')}>
+                    <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -151,5 +154,9 @@ const styles = StyleSheet.create({
     redirectText: {
         marginTop: 20,
         color: 'blue',
+    },
+    forgotPasswordText: {
+        marginTop: 10,
+        color: 'red',
     },
 });

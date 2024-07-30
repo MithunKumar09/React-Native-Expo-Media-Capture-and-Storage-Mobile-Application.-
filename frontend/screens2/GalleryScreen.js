@@ -23,7 +23,7 @@ export default function GalleryScreen() {
         }
 
         // Fetch media
-        const { data } = await axios.get(`http://192.168.143.187:5000/api/media/${userID}`, {
+        const { data } = await axios.get(`http://192.168.222.187:5000/api/media/${userID}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -56,7 +56,7 @@ export default function GalleryScreen() {
         return;
       }
 
-      await axios.delete(`http://192.168.143.187:5000/api/delete`, {
+      await axios.delete(`http://192.168.222.187:5000/api/delete`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ import LoginScreen from './screens2/LoginScreen';
 import RegisterScreen from './screens2/RegisterScreen';
 import CaptureScreen from './screens2/CaptureScreen';
 import GalleryScreen from './screens2/GalleryScreen';
+import ResetPasswordScreen from './screens2/ResetPasswordScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
         <Stack.Screen name="CaptureScreen" component={CaptureScreen} />
         <Stack.Screen name="GalleryScreen" component={GalleryScreen} />
       </Stack.Navigator>

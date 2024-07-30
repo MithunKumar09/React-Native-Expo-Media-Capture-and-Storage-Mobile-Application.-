@@ -75,7 +75,7 @@ export default function CaptureScreen({ route, navigation }) {
     setUploading(true); // Show loading indicator
 
     try {
-      const response = await axios.post('http://192.168.143.187:5000/api/media/upload', formData, {
+      const response = await axios.post('http://192.168.222.187:5000/api/media/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${user.token}`, // Include the token in the request headers

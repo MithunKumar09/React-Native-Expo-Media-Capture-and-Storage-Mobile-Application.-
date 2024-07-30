@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { FontAwesome } from '@expo/vector-icons'; // For icons
+import { storeToken } from '../storage/AsyncStorageUtils';
 
 export default function RegisterScreen({ navigation }) {
     const [username, setUsername] = useState('');
@@ -33,7 +34,7 @@ export default function RegisterScreen({ navigation }) {
         setLoading(true); // Show loading indicator
 
         try {
-            const response = await axios.post('http://192.168.143.187:5000/api/auth/register', {
+            const response = await axios.post('http://192.168.222.187:5000/api/auth/register', {
                 username,
                 email,
                 password,
@@ -109,12 +110,6 @@ export default function RegisterScreen({ navigation }) {
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
                     />
-                    <TouchableOpacity
-                        style={styles.iconButton}
-                        onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                        <FontAwesome name={showConfirmPassword ? 'eye-slash' : 'eye'} size={20} color="#888" />
-                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
                     {loading ? <ActivityIndicator size="small" color="#fff" /> : <Text style={styles.buttonText}>Submit</Text>}
