@@ -94,5 +94,5 @@ This project is a media capture and storage mobile application developed using R
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/MithunKumar09/React-Expo-MCSMA.git
-   cd React-Expo-MCSMA
+   git clone https://github.com/MithunKumar09/React-Native-Expo-Media Capture and Storage Mobile Application.git
+   cd React-Native-Expo-Media Capture and Storage Mobile Application
